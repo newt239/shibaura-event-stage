@@ -1,49 +1,6 @@
-"use client";
+import { MapPin, MessageCircle, Calendar, Users, Clock } from "lucide-react";
 
-import { useState } from "react";
-import { Calendar, MessageCircle, MapPin, Users, Clock } from "lucide-react";
-import SeatReservation from "@/components/seat-reservation";
-import ChatRoom from "@/components/chat-room";
-import Schedule from "@/components/schedule";
-import BottomNavigation from "@/components/bottom-navigation";
-
-export default function ShibauraFesApp() {
-  const [activeTab, setActiveTab] = useState("home");
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case "seats":
-        return <SeatReservation />;
-      case "chat":
-        return <ChatRoom />;
-      case "schedule":
-        return <Schedule />;
-      default:
-        return <HomePage />;
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50 pb-16">
-      <header className="bg-white shadow-sm border-b">
-        <div className="flex items-center justify-between p-4">
-          <div className="text-lg font-bold text-gray-800">
-            Shibaura Event Stage
-          </div>
-          <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-bold">S</span>
-          </div>
-        </div>
-      </header>
-
-      <main className="flex-1">{renderContent()}</main>
-
-      <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-    </div>
-  );
-}
-
-function HomePage() {
+export default function HomePage() {
   return (
     <div className="p-4 space-y-6">
       <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-6 text-white">

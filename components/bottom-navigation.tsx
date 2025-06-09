@@ -1,50 +1,62 @@
 "use client";
 
-import { Home, Calendar, MessageCircle, MapPin } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Home, MessageCircle, Calendar, Users } from "lucide-react";
 
-interface BottomNavigationProps {
-  activeTab: string;
-  onTabChange: (tab: string) => void;
-}
+export default function BottomNavigation() {
+  const pathname = usePathname();
 
-export default function BottomNavigation({
-  activeTab,
-  onTabChange,
-}: BottomNavigationProps) {
-  const tabs = [
-    { id: "home", label: "ホーム", icon: Home },
-    { id: "schedule", label: "スケジュール", icon: Calendar },
-    { id: "chat", label: "チャット", icon: MessageCircle },
-    { id: "seats", label: "座席予約", icon: MapPin },
-  ];
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return pathname === "/";
+    }
+    return pathname?.startsWith(path) && pathname !== "/";
+  };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
-      <div className="flex justify-around">
-        {tabs.map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === tab.id;
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t">
+      <div className="flex justify-around items-center h-16">
+        <Link
+          href="/"
+          className={`flex flex-col items-center justify-center w-full h-full ${
+            isActive("/") ? "text-green-500" : "text-gray-500"
+          }`}
+        >
+          <Home className="w-6 h-6" />
+          <span className="text-xs mt-1">ホーム</span>
+        </Link>
 
-          return (
-            <button
-              key={tab.id}
-              onClick={() => onTabChange(tab.id)}
-              className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors ${
-                isActive
-                  ? "text-green-600 bg-green-50"
-                  : "text-gray-600 hover:text-gray-800"
-              }`}
-            >
-              <Icon
-                className={`w-5 h-5 mb-1 ${
-                  isActive ? "text-green-600" : "text-gray-600"
-                }`}
-              />
-              <span className="text-xs font-medium">{tab.label}</span>
-            </button>
-          );
-        })}
+        <Link
+          href="/seats"
+          className={`flex flex-col items-center justify-center w-full h-full ${
+            isActive("/seats") ? "text-green-500" : "text-gray-500"
+          }`}
+        >
+          <Users className="w-6 h-6" />
+          <span className="text-xs mt-1">座席</span>
+        </Link>
+
+        <Link
+          href="/chat"
+          className={`flex flex-col items-center justify-center w-full h-full ${
+            isActive("/chat") ? "text-green-500" : "text-gray-500"
+          }`}
+        >
+          <MessageCircle className="w-6 h-6" />
+          <span className="text-xs mt-1">チャット</span>
+        </Link>
+
+        <Link
+          href="/schedule"
+          className={`flex flex-col items-center justify-center w-full h-full ${
+            isActive("/schedule") ? "text-green-500" : "text-gray-500"
+          }`}
+        >
+          <Calendar className="w-6 h-6" />
+          <span className="text-xs mt-1">スケジュール</span>
+        </Link>
       </div>
-    </div>
+    </nav>
   );
 }
