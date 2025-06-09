@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Calendar, Clock, MapPin, Users } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Calendar, Clock, MapPin, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Event {
-  id: string
-  title: string
-  time: string
-  duration: string
-  type: "band" | "talk" | "club" | "mail"
-  performer: string
-  description: string
+  id: string;
+  title: string;
+  time: string;
+  duration: string;
+  type: "band" | "talk" | "club" | "mail";
+  performer: string;
+  description: string;
 }
 
 const todayEvents: Event[] = [
@@ -51,7 +51,7 @@ const todayEvents: Event[] = [
     performer: "放送部",
     description: "学生からのメッセージ紹介",
   },
-]
+];
 
 const weekEvents = [
   {
@@ -89,40 +89,40 @@ const weekEvents = [
       { title: "クロージングセレモニー", time: "13:30", performer: "学生会" },
     ],
   },
-]
+];
 
 export default function Schedule() {
-  const [activeView, setActiveView] = useState<"today" | "week">("today")
+  const [activeView, setActiveView] = useState<"today" | "week">("today");
 
   const getEventTypeColor = (type: string) => {
     switch (type) {
       case "band":
-        return "bg-red-100 text-red-800"
+        return "bg-red-100 text-red-800";
       case "talk":
-        return "bg-blue-100 text-blue-800"
+        return "bg-green-100 text-green-800";
       case "club":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800";
       case "mail":
-        return "bg-purple-100 text-purple-800"
+        return "bg-purple-100 text-purple-800";
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   const getEventTypeLabel = (type: string) => {
     switch (type) {
       case "band":
-        return "バンド"
+        return "バンド";
       case "talk":
-        return "トーク"
+        return "トーク";
       case "club":
-        return "クラブ"
+        return "クラブ";
       case "mail":
-        return "お便り"
+        return "お便り";
       default:
-        return "その他"
+        return "その他";
     }
-  }
+  };
 
   return (
     <div className="p-4 space-y-4">
@@ -151,19 +151,30 @@ export default function Schedule() {
 
       {activeView === "today" ? (
         <div className="space-y-4">
-          <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+          <div className="bg-green-50 rounded-lg p-4 border border-green-200">
             <div className="flex items-center mb-2">
-              <Calendar className="w-5 h-5 text-blue-600 mr-2" />
-              <span className="font-semibold text-blue-800">今日 - 6月2日（日）</span>
+              <Calendar className="w-5 h-5 text-green-600 mr-2" />
+              <span className="font-semibold text-green-800">
+                今日 - 6月2日（日）
+              </span>
             </div>
-            <p className="text-sm text-blue-700">昼休みステージイベント開催日</p>
+            <p className="text-sm text-green-700">
+              昼休みステージイベント開催日
+            </p>
           </div>
 
           {todayEvents.map((event) => (
-            <div key={event.id} className="bg-white rounded-lg p-4 shadow-sm border">
+            <div
+              key={event.id}
+              className="bg-white rounded-lg p-4 shadow-sm border"
+            >
               <div className="flex justify-between items-start mb-2">
                 <h3 className="font-semibold text-lg">{event.title}</h3>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getEventTypeColor(event.type)}`}>
+                <span
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${getEventTypeColor(
+                    event.type
+                  )}`}
+                >
                   {getEventTypeLabel(event.type)}
                 </span>
               </div>
@@ -189,7 +200,9 @@ export default function Schedule() {
 
               {event.time === "12:45" && (
                 <div className="mt-3 p-2 bg-red-50 rounded border border-red-200">
-                  <span className="text-xs font-medium text-red-600">現在開催中</span>
+                  <span className="text-xs font-medium text-red-600">
+                    現在開催中
+                  </span>
                 </div>
               )}
             </div>
@@ -204,12 +217,19 @@ export default function Schedule() {
               </div>
               <div className="p-4 space-y-3">
                 {day.events.map((event, eventIndex) => (
-                  <div key={eventIndex} className="flex justify-between items-center">
+                  <div
+                    key={eventIndex}
+                    className="flex justify-between items-center"
+                  >
                     <div>
                       <div className="font-medium">{event.title}</div>
-                      <div className="text-sm text-gray-600">{event.performer}</div>
+                      <div className="text-sm text-gray-600">
+                        {event.performer}
+                      </div>
                     </div>
-                    <div className="text-sm font-medium text-gray-800">{event.time}</div>
+                    <div className="text-sm font-medium text-gray-800">
+                      {event.time}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -228,5 +248,5 @@ export default function Schedule() {
         </ul>
       </div>
     </div>
-  )
+  );
 }

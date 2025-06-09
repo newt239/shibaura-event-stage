@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { Send, Heart, ThumbsUp, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { useState, useEffect, useRef } from "react";
+import { Send, Heart, ThumbsUp, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface ChatMessage {
-  id: string
-  user: string
-  message: string
-  timestamp: Date
-  reactions?: string[]
+  id: string;
+  user: string;
+  message: string;
+  timestamp: Date;
+  reactions?: string[];
 }
 
 const mockUsers = [
@@ -24,7 +24,7 @@ const mockUsers = [
   "中村さん",
   "小林さん",
   "加藤さん",
-]
+];
 
 const mockMessages = [
   "すごい上手！",
@@ -37,29 +37,31 @@ const mockMessages = [
   "ギターうまい！",
   "歌詞が心に響く",
   "ブラボー！",
-]
+];
 
 export default function ChatRoom() {
-  const [messages, setMessages] = useState<ChatMessage[]>([])
-  const [newMessage, setNewMessage] = useState("")
-  const [currentUser] = useState("あなた")
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [currentUser] = useState("あなた");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    scrollToBottom();
+  }, [messages]);
 
   // Simulate incoming messages
   useEffect(() => {
     const interval = setInterval(() => {
-      if (Math.random() > 0.7) {
-        // 30% chance every 3 seconds
-        const randomUser = mockUsers[Math.floor(Math.random() * mockUsers.length)]
-        const randomMessage = mockMessages[Math.floor(Math.random() * mockMessages.length)]
+      if (Math.random() > 0.5) {
+        // 50% chance every 1 seconds
+        const randomUser =
+          mockUsers[Math.floor(Math.random() * mockUsers.length)];
+        const randomMessage =
+          mockMessages[Math.floor(Math.random() * mockMessages.length)];
 
         const newMsg: ChatMessage = {
           id: Date.now().toString(),
@@ -67,14 +69,14 @@ export default function ChatRoom() {
           message: randomMessage,
           timestamp: new Date(),
           reactions: [],
-        }
+        };
 
-        setMessages((prev) => [...prev, newMsg])
+        setMessages((prev) => [...prev, newMsg]);
       }
-    }, 3000)
+    }, 1000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const sendMessage = () => {
     if (newMessage.trim()) {
@@ -84,31 +86,37 @@ export default function ChatRoom() {
         message: newMessage,
         timestamp: new Date(),
         reactions: [],
-      }
+      };
 
-      setMessages((prev) => [...prev, message])
-      setNewMessage("")
+      setMessages((prev) => [...prev, message]);
+      setNewMessage("");
     }
-  }
+  };
 
   const addReaction = (messageId: string, reaction: string) => {
     setMessages((prev) =>
-      prev.map((msg) => (msg.id === messageId ? { ...msg, reactions: [...(msg.reactions || []), reaction] } : msg)),
-    )
-  }
+      prev.map((msg) =>
+        msg.id === messageId
+          ? { ...msg, reactions: [...(msg.reactions || []), reaction] }
+          : msg
+      )
+    );
+  };
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString("ja-JP", {
       hour: "2-digit",
       minute: "2-digit",
-    })
-  }
+    });
+  };
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)]">
       <div className="bg-white border-b p-4">
         <h2 className="text-xl font-bold">ライブチャット</h2>
-        <p className="text-sm text-gray-600">現在のパフォーマンスについてコメントしよう</p>
+        <p className="text-sm text-gray-600">
+          現在のパフォーマンスについてコメントしよう
+        </p>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
@@ -120,27 +128,47 @@ export default function ChatRoom() {
         )}
 
         {messages.map((message) => (
-          <div key={message.id} className={`flex ${message.user === currentUser ? "justify-end" : "justify-start"}`}>
+          <div
+            key={message.id}
+            className={`flex ${
+              message.user === currentUser ? "justify-end" : "justify-start"
+            }`}
+          >
             <div
               className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                message.user === currentUser ? "bg-blue-500 text-white" : "bg-white border shadow-sm"
+                message.user === currentUser
+                  ? "bg-green-500 text-white"
+                  : "bg-white border shadow-sm"
               }`}
             >
               {message.user !== currentUser && (
-                <div className="text-xs font-semibold text-gray-600 mb-1">{message.user}</div>
+                <div className="text-xs font-semibold text-gray-600 mb-1">
+                  {message.user}
+                </div>
               )}
               <div className="text-sm">{message.message}</div>
               <div className="flex items-center justify-between mt-2">
-                <div className="text-xs opacity-70">{formatTime(message.timestamp)}</div>
+                <div className="text-xs opacity-70">
+                  {formatTime(message.timestamp)}
+                </div>
                 {message.user !== currentUser && (
                   <div className="flex space-x-1">
-                    <button onClick={() => addReaction(message.id, "❤️")} className="p-1 hover:bg-gray-100 rounded">
+                    <button
+                      onClick={() => addReaction(message.id, "❤️")}
+                      className="p-1 hover:bg-gray-100 rounded"
+                    >
                       <Heart className="w-3 h-3" />
                     </button>
-                    <button onClick={() => addReaction(message.id, "👍")} className="p-1 hover:bg-gray-100 rounded">
+                    <button
+                      onClick={() => addReaction(message.id, "👍")}
+                      className="p-1 hover:bg-gray-100 rounded"
+                    >
                       <ThumbsUp className="w-3 h-3" />
                     </button>
-                    <button onClick={() => addReaction(message.id, "⭐")} className="p-1 hover:bg-gray-100 rounded">
+                    <button
+                      onClick={() => addReaction(message.id, "⭐")}
+                      className="p-1 hover:bg-gray-100 rounded"
+                    >
                       <Star className="w-3 h-3" />
                     </button>
                   </div>
@@ -149,7 +177,10 @@ export default function ChatRoom() {
               {message.reactions && message.reactions.length > 0 && (
                 <div className="flex flex-wrap gap-1 mt-2">
                   {message.reactions.map((reaction, index) => (
-                    <span key={index} className="text-xs bg-gray-100 px-1 rounded">
+                    <span
+                      key={index}
+                      className="text-xs bg-gray-100 px-1 rounded"
+                    >
                       {reaction}
                     </span>
                   ))}
@@ -197,5 +228,5 @@ export default function ChatRoom() {
         </div>
       </div>
     </div>
-  )
+  );
 }
