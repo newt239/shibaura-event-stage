@@ -56,8 +56,8 @@ export default function ChatRoom() {
   // Simulate incoming messages
   useEffect(() => {
     const interval = setInterval(() => {
-      if (Math.random() > 0.5) {
-        // 50% chance every 1 seconds
+      if (Math.random() > 0.5 && messages.length < 20) {
+        // 50% chance every 1 seconds and messages count is less than 20
         const randomUser =
           mockUsers[Math.floor(Math.random() * mockUsers.length)];
         const randomMessage =
@@ -76,7 +76,7 @@ export default function ChatRoom() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [messages.length]);
 
   const sendMessage = () => {
     if (newMessage.trim()) {
