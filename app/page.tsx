@@ -3,7 +3,7 @@ import { MapPin, MessageCircle, Calendar, Users, Clock } from "lucide-react";
 export default function HomePage() {
   return (
     <div className="p-4 space-y-6">
-      <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-6 text-white">
+      <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg p-6 text-white">
         <h1 className="text-2xl font-bold mb-2">Shibaura Event Stage</h1>
         <p className="text-green-100">昼休みステージイベント開催中！</p>
       </div>
