@@ -111,7 +111,7 @@ export default function ChatRoom() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100lvh-8rem)]">
+    <div className="flex flex-col h-[calc(100dvh-8rem)]">
       <div className="bg-white border-b p-4">
         <h2 className="text-xl font-bold">ライブチャット</h2>
         <p className="text-sm text-gray-600">
@@ -192,7 +192,7 @@ export default function ChatRoom() {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="bg-white border-t p-4">
+      <div className="bg-white border-t p-4 fixed bottom-[65px] w-full">
         <div className="flex space-x-2">
           <Input
             value={newMessage}
