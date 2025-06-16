@@ -1,5 +1,3 @@
-"use client";
-
 const weekEvents = [
   {
     date: "6月3日（月）",

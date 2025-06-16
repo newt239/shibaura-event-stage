@@ -1,5 +1,3 @@
-"use client";
-
 import { Calendar, Clock, MapPin, Users } from "lucide-react";
 
 interface Event {
