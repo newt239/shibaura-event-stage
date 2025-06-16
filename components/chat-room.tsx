@@ -111,7 +111,7 @@ export default function ChatRoom() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)]">
+    <div className="flex flex-col h-[calc(100dvh-8rem)]">
       <div className="bg-white border-b p-4">
         <h2 className="text-xl font-bold">ライブチャット</h2>
         <p className="text-sm text-gray-600">
