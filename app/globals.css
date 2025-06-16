@@ -4,7 +4,7 @@
 
 body {
   @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
-  font-family: "Noto Sans JP", serif;
+  font-family: "Noto Sans JP", "BIZ UDPGothic", sans-serif;
 }
 
 @layer utilities {
