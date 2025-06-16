@@ -198,7 +198,7 @@ export default function ChatRoom() {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="メッセージを入力..."
-            onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             className="flex-1"
           />
           <Button onClick={sendMessage} size="sm">
