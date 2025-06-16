@@ -1,6 +1,37 @@
 import { MapPin, MessageCircle, Calendar, Users, Clock } from "lucide-react";
 import Link from "next/link";
 
+const menuCards = [
+  {
+    href: "/seats",
+    icon: MapPin,
+    iconColor: "text-green-500",
+    title: "座席予約",
+    description: "レジャーシートの予約状況を確認",
+  },
+  {
+    href: "/chat",
+    icon: MessageCircle,
+    iconColor: "text-green-500",
+    title: "ライブチャット",
+    description: "パフォーマンスにリアルタイムで反応",
+  },
+  {
+    href: "/schedule/week",
+    icon: Calendar,
+    iconColor: "text-purple-500",
+    title: "スケジュール",
+    description: "今週の予定を確認",
+  },
+  {
+    href: "/schedule",
+    icon: Users,
+    iconColor: "text-orange-500",
+    title: "出演者情報",
+    description: "バンドやクラブ活動の詳細",
+  },
+];
+
 export default function HomePage() {
   return (
     <div className="p-4 space-y-6">
@@ -10,49 +41,19 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Link href="/seats" className="block">
-          <div className="bg-white rounded-lg p-4 shadow-sm border hover:shadow-md transition-shadow">
-            <div className="flex items-center mb-2">
-              <MapPin className="w-5 h-5 text-green-500 mr-2" />
-              <span className="font-semibold">座席予約</span>
+        {menuCards.map((card, index) => (
+          <Link key={index} href={card.href} className="block">
+            <div className="bg-white rounded-lg p-4 shadow-sm border hover:shadow-md transition-shadow h-full">
+              <div className="flex items-center mb-2">
+                <card.icon className={`w-5 h-5 ${card.iconColor} mr-2`} />
+                <span className="font-semibold whitespace-nowrap overflow-hidden">
+                  {card.title}
+                </span>
+              </div>
+              <p className="text-sm text-gray-600">{card.description}</p>
             </div>
-            <p className="text-sm text-gray-600">
-              レジャーシートの予約状況を確認
-            </p>
-          </div>
-        </Link>
-
-        <Link href="/chat" className="block">
-          <div className="bg-white rounded-lg p-4 shadow-sm border hover:shadow-md transition-shadow">
-            <div className="flex items-center mb-2">
-              <MessageCircle className="w-5 h-5 text-green-500 mr-2" />
-              <span className="font-semibold">ライブチャット</span>
-            </div>
-            <p className="text-sm text-gray-600">
-              パフォーマンスにリアルタイムで反応
-            </p>
-          </div>
-        </Link>
-
-        <Link href="/schedule/week" className="block">
-          <div className="bg-white rounded-lg p-4 shadow-sm border hover:shadow-md transition-shadow">
-            <div className="flex items-center mb-2">
-              <Calendar className="w-5 h-5 text-purple-500 mr-2" />
-              <span className="font-semibold">スケジュール</span>
-            </div>
-            <p className="text-sm text-gray-600">今週の予定を確認</p>
-          </div>
-        </Link>
-
-        <Link href="/schedule" className="block">
-          <div className="bg-white rounded-lg p-4 shadow-sm border hover:shadow-md transition-shadow">
-            <div className="flex items-center mb-2">
-              <Users className="w-5 h-5 text-orange-500 mr-2" />
-              <span className="font-semibold">出演者情報</span>
-            </div>
-            <p className="text-sm text-gray-600">バンドやクラブ活動の詳細</p>
-          </div>
-        </Link>
+          </Link>
+        ))}
       </div>
 
       <Link href="/schedule" className="block">
