@@ -32,8 +32,8 @@ const weekEvents = [
   {
     date: "6月7日（金）",
     events: [
-      { title: "フィナーレコンサート", time: "12:30", performer: "全出演者" },
-      { title: "クロージングセレモニー", time: "13:30", performer: "学生会" },
+      { title: "ダンスパフォーマンス", time: "12:30", performer: "ダンス部" },
+      { title: "コーラス演奏", time: "13:15", performer: "合唱部" },
     ],
   },
 ];
